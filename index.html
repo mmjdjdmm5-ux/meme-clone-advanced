@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MemeGen Clone — Advanced</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>MemeGen Clone — Advanced</h1>
-  <p>Upload backgrounds, add draggable text, then export PNG/JPG.</p>
+  <p>Upload background, add text, or generate AI meme captions!</p>
 
   <div class="controls">
-    <input type="file" id="imageUpload" accept="image/*" />
+    <input type="file" id="imageUpload" />
     <button id="addTextBtn">Add Text</button>
     <button id="exportBtn">Export Meme</button>
+    <button id="generateBtn">Generate AI Caption</button>
   </div>
 
   <div id="memeContainer">
