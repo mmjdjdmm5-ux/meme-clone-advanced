@@ -1,33 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meme Generator 😎</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Video Meme Maker</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Meme Generator 😎</h1>
+  <div class="app">
+    <h1>Video Meme Maker 🎬</h1>
 
-    <div class="meme-box">
-      <label>Top Text:</label>
-      <input type="text" id="topText" placeholder="Enter top text">
+    <div class="controls">
+      <label class="file">
+        Choose image
+        <input id="imageInput" type="file" accept="image/*" />
+      </label>
 
-      <label>Bottom Text:</label>
-      <input type="text" id="bottomText" placeholder="Enter bottom text">
+      <div class="row">
+        <input id="topText" type="text" placeholder="Top text (optional)" />
+        <input id="bottomText" type="text" placeholder="Bottom text (optional)" />
+      </div>
 
-      <label>Choose Image:</label>
-      <input type="file" id="imageInput" accept="image/*">
+      <div class="row">
+        <button id="autoCaptionBtn">Auto Caption</button>
+        <label>Duration:
+          <select id="duration">
+            <option value="2000">2s</option>
+            <option value="3000" selected>3s</option>
+            <option value="4000">4s</option>
+            <option value="5000">5s</option>
+          </select>
+        </label>
+      </div>
 
-      <button id="generateBtn">Generate Meme</button>
+      <div class="row">
+        <button id="generateBtn" class="primary">Generate Video</button>
+        <a id="downloadLink" class="hidden">Download Video</a>
+      </div>
+
+      <p class="hint">Tip: Upload a photo from your phone for best results.</p>
     </div>
 
-    <div class="output">
-      <canvas id="memeCanvas"></canvas>
-      <a id="downloadLink" download="meme.png">Download Meme</a>
+    <div class="preview">
+      <canvas id="canvas"></canvas>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
