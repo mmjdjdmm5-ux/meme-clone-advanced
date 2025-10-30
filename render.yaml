@@ -1,7 +1,7 @@
 services:
   - type: web
-    name: meme-clone-advanced
+    name: meme-clone-advanced-4
     env: node
-    buildCommand: npm install
-    startCommand: node backend/server.js
+    buildCommand: "npm install"
+    startCommand: "node server.js"
     plan: free
