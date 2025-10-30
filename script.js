@@ -67,4 +67,4 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
 
   const data = await response.json();
   alert("AI Caption: " + data.caption);
-});
+}); 
