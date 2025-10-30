@@ -1,67 +1,48 @@
-const canvas = document.getElementById("memeCanvas");
-const ctx = canvas.getContext("2d");
-let backgroundImage = null;
-let textElements = [];
+// Meme Generator Script Connected with Render Backend
+const form = document.getElementById("memeForm");
+const resultDiv = document.getElementById("result");
+const loadingText = document.getElementById("loadingText");
 
-// Image upload
-document.getElementById("imageUpload").addEventListener("change", function (e) {
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const img = new Image();
-    img.onload = function () {
-      backgroundImage = img;
-      drawMeme();
-    };
-    img.src = event.target.result;
-  };
-  reader.readAsDataURL(e.target.files[0]);
-});
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = document.getElementById("text").value.trim();
 
-// Add text
-document.getElementById("addTextBtn").addEventListener("click", function () {
-  const text = prompt("Enter text:");
-  if (text) {
-    const x = canvas.width / 2;
-    const y = canvas.height / 2;
-    textElements.push({ text, x, y });
-    drawMeme();
-  }
-});
-
-// Draw meme
-function drawMeme() {
-  if (!backgroundImage) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-  ctx.font = "40px Impact";
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
-  ctx.strokeStyle = "black";
-  ctx.lineWidth = 3;
-
-  textElements.forEach((t) => {
-    ctx.fillText(t.text, t.x, t.y);
-    ctx.strokeText(t.text, t.x, t.y);
-  });
-}
-
-// Export meme
-document.getElementById("generateBtn").addEventListener("click", async () => {
-  const imageInput = document.getElementById("imageUpload");
-  if (!imageInput.files[0]) {
-    alert("Please upload an image first!");
+  if (!text) {
+    alert("Please enter a meme idea first!");
     return;
   }
 
-  const formData = new FormData();
-  formData.append("image", imageInput.files[0]);
+  loadingText.style.display = "block";
+  resultDiv.innerHTML = "";
 
-  // 👇 Your backend (Render) AI API URL
-  const response = await fetch("https://meme-clone-advanced-3.onrender.com/generate-meme", {
-    method: "POST",
-    body: formData,
-  });
+  try {
+    const response = await fetch("https://meme-clone-advanced.onrender.com/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: text }),
+    });
 
-  const data = await response.json();
-  alert("AI Caption: " + data.caption);
+    if (!response.ok) {
+      throw new Error("Failed to generate meme. Try again later!");
+    }
+
+    const data = await response.json();
+
+    // Display meme image
+    const img = document.createElement("img");
+    img.src = data.imageUrl;
+    img.alt = "Generated Meme";
+    img.style.maxWidth = "100%";
+    img.style.borderRadius = "10px";
+    img.style.marginTop = "15px";
+
+    resultDiv.appendChild(img);
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong while generating meme!");
+  } finally {
+    loadingText.style.display = "none";
+  }
 });
