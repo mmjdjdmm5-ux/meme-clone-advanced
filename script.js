@@ -1,48 +1,33 @@
-// Meme Generator Script Connected with Render Backend
-const form = document.getElementById("memeForm");
-const resultDiv = document.getElementById("result");
-const loadingText = document.getElementById("loadingText");
-
-form.addEventListener("submit", async (e) => {
+document.getElementById("memeForm").addEventListener("submit", async function (e) {
   e.preventDefault();
-  const text = document.getElementById("text").value.trim();
 
-  if (!text) {
-    alert("Please enter a meme idea first!");
-    return;
-  }
-
-  loadingText.style.display = "block";
-  resultDiv.innerHTML = "";
+  const topText = document.getElementById("topText").value;
+  const bottomText = document.getElementById("bottomText").value;
+  const imageUrl = document.getElementById("imageUrl").value;
 
   try {
-    const response = await fetch("https://meme-clone-advanced.onrender.com/generate", {
+    const response = await fetch("https://meme-clone-advanced.onrender.com/api/generate", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ prompt: text }),
+      body: JSON.stringify({ topText, bottomText, imageUrl })
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to generate meme. Try again later!");
-    }
 
     const data = await response.json();
 
-    // Display meme image
-    const img = document.createElement("img");
-    img.src = data.imageUrl;
-    img.alt = "Generated Meme";
-    img.style.maxWidth = "100%";
-    img.style.borderRadius = "10px";
-    img.style.marginTop = "15px";
-
-    resultDiv.appendChild(img);
+    if (data.memeUrl) {
+      const img = document.createElement("img");
+      img.src = data.memeUrl;
+      img.style.maxWidth = "100%";
+      img.style.marginTop = "20px";
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("result").appendChild(img);
+    } else {
+      alert("❌ Meme not generated!");
+    }
   } catch (error) {
-    console.error(error);
-    alert("Something went wrong while generating meme!");
-  } finally {
-    loadingText.style.display = "none";
+    console.error("Error:", error);
+    alert("⚠️ Server connection failed!");
   }
 });
