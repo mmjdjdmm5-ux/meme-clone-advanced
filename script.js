@@ -1,33 +1,28 @@
-document.getElementById("memeForm").addEventListener("submit", async function (e) {
+// 👇 yahan apna backend link daalo:
+const API_URL = "https://your-backend-name.onrender.com";
+
+document.getElementById("memeForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const topText = document.getElementById("topText").value;
   const bottomText = document.getElementById("bottomText").value;
-  const imageUrl = document.getElementById("imageUrl").value;
+
+  const memeImage = document.getElementById("memeImage");
+  memeImage.src = "";
+  memeImage.alt = "Generating meme...";
 
   try {
-    const response = await fetch("https://meme-clone-advanced.onrender.com/api/generate", {
+    const response = await fetch(`${API_URL}/generate`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ topText, bottomText, imageUrl })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topText, bottomText }),
     });
 
     const data = await response.json();
-
-    if (data.memeUrl) {
-      const img = document.createElement("img");
-      img.src = data.memeUrl;
-      img.style.maxWidth = "100%";
-      img.style.marginTop = "20px";
-      document.getElementById("result").innerHTML = "";
-      document.getElementById("result").appendChild(img);
-    } else {
-      alert("❌ Meme not generated!");
-    }
+    memeImage.src = data.imageUrl;
+    memeImage.alt = "Generated Meme";
   } catch (error) {
-    console.error("Error:", error);
-    alert("⚠️ Server connection failed!");
+    memeImage.alt = "Error generating meme 😢";
+    console.error(error);
   }
 });
