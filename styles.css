@@ -1,65 +1,16 @@
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #84fab0, #8fd3f4);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  padding: 20px;
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-}
-
-h1 {
-  color: #333;
-}
-
-.meme-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-input[type="text"], input[type="file"] {
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #45a049;
-}
-
-canvas {
-  max-width: 100%;
-  border: 2px solid #333;
-  border-radius: 10px;
-}
-
-#downloadLink {
-  display: block;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
+*{box-sizing:border-box}
+body{font-family:Inter,Arial;margin:0;background:#0f172a;color:#fff;display:flex;justify-content:center;align-items:flex-start;padding:28px}
+.app{width:100%;max-width:760px}
+h1{text-align:left;margin:0 0 12px 0;color:#fff}
+.controls{background:#0b1220;padding:16px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,0.5)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.file input{display:block;margin-top:6px}
+input[type="text"]{padding:10px;border-radius:8px;border:1px solid #233;min-width:160px;background:#0f172a;color:#fff}
+button{padding:10px 12px;border-radius:8px;border:none;cursor:pointer;background:#2b6cb0;color:#fff}
+button.primary{background:#7c3aed}
+button:hover{opacity:0.95}
+.preview{margin-top:14px;display:flex;justify-content:center}
+canvas{background:#111;border-radius:8px;max-width:100%;height:auto}
+.hint{color:#9aa4b2;font-size:13px;margin-top:8px}
+.hidden{display:none}
+#downloadLink{display:inline-block;padding:10px 12px;background:#10b981;border-radius:8px;color:#fff;text-decoration:none}
