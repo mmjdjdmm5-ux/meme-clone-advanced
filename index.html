@@ -1,49 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Video Meme Maker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Meme Video Generator</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <h1>Video Meme Maker 🎬</h1>
+  <div class="container">
+    <h1>AI Meme Video Generator 🤖</h1>
 
-    <div class="controls">
-      <label class="file">
-        Choose image
-        <input id="imageInput" type="file" accept="image/*" />
-      </label>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <input type="text" id="topText" placeholder="Top text..." />
+    <input type="text" id="bottomText" placeholder="Bottom text..." />
+    <button id="generateBtn">Generate Video Meme</button>
 
-      <div class="row">
-        <input id="topText" type="text" placeholder="Top text (optional)" />
-        <input id="bottomText" type="text" placeholder="Bottom text (optional)" />
-      </div>
-
-      <div class="row">
-        <button id="autoCaptionBtn">Auto Caption</button>
-        <label>Duration:
-          <select id="duration">
-            <option value="2000">2s</option>
-            <option value="3000" selected>3s</option>
-            <option value="4000">4s</option>
-            <option value="5000">5s</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="row">
-        <button id="generateBtn" class="primary">Generate Video</button>
-        <a id="downloadLink" class="hidden">Download Video</a>
-      </div>
-
-      <p class="hint">Tip: Upload a photo from your phone for best results.</p>
-    </div>
-
-    <div class="preview">
-      <canvas id="canvas"></canvas>
-    </div>
+    <div id="videoContainer"></div>
   </div>
 
   <script src="script.js"></script>
