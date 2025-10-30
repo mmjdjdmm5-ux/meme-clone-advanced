@@ -1,28 +1,45 @@
-// 👇 yahan apna backend link daalo:
-const API_URL = "https://your-backend-name.onrender.com";
+const generateBtn = document.getElementById("generateBtn");
+const topTextInput = document.getElementById("topText");
+const bottomTextInput = document.getElementById("bottomText");
+const imageInput = document.getElementById("imageInput");
+const canvas = document.getElementById("memeCanvas");
+const ctx = canvas.getContext("2d");
+const downloadLink = document.getElementById("downloadLink");
 
-document.getElementById("memeForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const topText = document.getElementById("topText").value;
-  const bottomText = document.getElementById("bottomText").value;
-
-  const memeImage = document.getElementById("memeImage");
-  memeImage.src = "";
-  memeImage.alt = "Generating meme...";
-
-  try {
-    const response = await fetch(`${API_URL}/generate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topText, bottomText }),
-    });
-
-    const data = await response.json();
-    memeImage.src = data.imageUrl;
-    memeImage.alt = "Generated Meme";
-  } catch (error) {
-    memeImage.alt = "Error generating meme 😢";
-    console.error(error);
+generateBtn.addEventListener("click", () => {
+  const file = imageInput.files[0];
+  if (!file) {
+    alert("Please select an image!");
+    return;
   }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const topText = topTextInput.value.toUpperCase();
+      const bottomText = bottomTextInput.value.toUpperCase();
+
+      ctx.font = `${canvas.width / 15}px Impact`;
+      ctx.fillStyle = "white";
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 3;
+      ctx.textAlign = "center";
+
+      ctx.fillText(topText, canvas.width / 2, 50);
+      ctx.strokeText(topText, canvas.width / 2, 50);
+
+      ctx.fillText(bottomText, canvas.width / 2, canvas.height - 20);
+      ctx.strokeText(bottomText, canvas.width / 2, canvas.height - 20);
+
+      downloadLink.href = canvas.toDataURL("image/png");
+      downloadLink.style.display = "block";
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
 });
