@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meme Generator 😎</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="container">
     <h1>Meme Generator 😎</h1>
 
-    <form id="memeForm">
+    <div class="meme-box">
       <label>Top Text:</label>
-      <input type="text" id="topText" placeholder="Top text" required />
+      <input type="text" id="topText" placeholder="Enter top text">
 
       <label>Bottom Text:</label>
-      <input type="text" id="bottomText" placeholder="Bottom text" required />
+      <input type="text" id="bottomText" placeholder="Enter bottom text">
 
-      <button type="submit">Generate Meme</button>
-    </form>
+      <label>Choose Image:</label>
+      <input type="file" id="imageInput" accept="image/*">
 
-    <div class="meme">
-      <img id="memeImage" src="" alt="Your Meme will appear here!" />
+      <button id="generateBtn">Generate Meme</button>
+    </div>
+
+    <div class="output">
+      <canvas id="memeCanvas"></canvas>
+      <a id="downloadLink" download="meme.png">Download Meme</a>
     </div>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
