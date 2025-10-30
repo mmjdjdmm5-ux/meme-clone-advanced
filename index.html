@@ -1,25 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MemeGen Clone — Advanced</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meme Generator</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>MemeGen Clone — Advanced</h1>
-  <p>Upload background, add text, or generate AI meme captions!</p>
+  <main class="container">
+    <h1>Meme Generator</h1>
 
-  <div class="controls">
-    <input type="file" id="imageUpload" />
-    <button id="addTextBtn">Add Text</button>
-    <button id="exportBtn">Export Meme</button>
-    <button id="generateBtn">Generate AI Caption</button>
-  </div>
+    <form id="memeForm">
+      <label>Image URL</label>
+      <input id="imageUrl" placeholder="Paste image URL or leave blank" />
 
-  <div id="memeContainer">
-    <canvas id="memeCanvas"></canvas>
-  </div>
+      <label>Top text</label>
+      <input id="topText" placeholder="Top text" />
+
+      <label>Bottom text</label>
+      <input id="bottomText" placeholder="Bottom text" />
+
+      <button type="submit">Generate Meme</button>
+    </form>
+
+    <div id="loading" class="hidden">Generating…</div>
+    <div id="result"></div>
+  </main>
 
   <script src="script.js"></script>
 </body>
