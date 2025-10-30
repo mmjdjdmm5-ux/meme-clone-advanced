@@ -1,0 +1,1 @@
+console.log('MemeGen Clone Advanced loaded');
