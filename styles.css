@@ -1,1 +1,33 @@
-:root{font-family:Inter,system-ui,sans-serif;}body{margin:0;padding:20px;background:#f8fafc;color:#111;}
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.controls {
+  margin: 15px 0;
+}
+
+#memeContainer {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #333;
+  background: white;
+  overflow: hidden;
+}
+
+canvas {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.draggable {
+  position: absolute;
+  cursor: move;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px #000;
+  user-select: none;
+}
