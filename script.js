@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 let backgroundImage = null;
 let textElements = [];
 
+// Image upload
 document.getElementById("imageUpload").addEventListener("change", function (e) {
   const reader = new FileReader();
   reader.onload = function (event) {
@@ -16,6 +17,7 @@ document.getElementById("imageUpload").addEventListener("change", function (e) {
   reader.readAsDataURL(e.target.files[0]);
 });
 
+// Add text
 document.getElementById("addTextBtn").addEventListener("click", function () {
   const text = prompt("Enter text:");
   if (text) {
@@ -26,12 +28,14 @@ document.getElementById("addTextBtn").addEventListener("click", function () {
   }
 });
 
+// Draw meme
 function drawMeme() {
   if (!backgroundImage) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.font = "40px Impact";
-  ctx.textAlign = "center";
   ctx.fillStyle = "white";
+  ctx.textAlign = "center";
   ctx.strokeStyle = "black";
   ctx.lineWidth = 3;
 
@@ -41,14 +45,7 @@ function drawMeme() {
   });
 }
 
-function exportMeme() {
-  const link = document.createElement("a");
-  link.download = "meme.png";
-  link.href = memeCanvas.toDataURL("image/png");
-  link.click();
-}
-
-// 🔹 AI Meme Caption Generator
+// Export meme
 document.getElementById("generateBtn").addEventListener("click", async () => {
   const imageInput = document.getElementById("imageUpload");
   if (!imageInput.files[0]) {
@@ -59,12 +56,12 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
   const formData = new FormData();
   formData.append("image", imageInput.files[0]);
 
-  // Apna backend ya AI API yahan likhna hoga
-  const response = await fetch("https://your-backend-url.com/generate-meme", {
+  // 👇 Your backend (Render) AI API URL
+  const response = await fetch("https://meme-clone-advanced-3.onrender.com/generate-meme", {
     method: "POST",
     body: formData,
   });
 
   const data = await response.json();
   alert("AI Caption: " + data.caption);
-}); 
+});
