@@ -1,13 +1,11 @@
 {
-  "name": "meme-clone-advanced",
+  "name": "meme-clone",
   "version": "1.0.0",
-  "description": "Meme clone project backend",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "node-fetch": "^2.6.7"
   }
 }
